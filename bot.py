@@ -1,8 +1,6 @@
 import discord
 import responses
 
-TOKEN = 'MTAzNDI5ODczOTg1MjA1MDQ2Mw.GZed6Y.jP74j9vtc3qW44P5sMbkdgevTpquHpZXbgyE_A'
-
 async def send_message(message, user_message):
     try:
         response = responses.get_response(user_message)
@@ -10,9 +8,8 @@ async def send_message(message, user_message):
     except Exception as e:
         print(e)
 
-def run_discord_bot():
+def run_discord_bot(TOKEN):
     
-    TOKEN = 'MTAzNDI5ODczOTg1MjA1MDQ2Mw.GZed6Y.jP74j9vtc3qW44P5sMbkdgevTpquHpZXbgyE_A'
     intents = discord.Intents.default()
     intents.message_content = True
     client = discord.Client(intents=intents)
@@ -21,6 +18,7 @@ def run_discord_bot():
     async def on_ready():
         print('{} has been turned on successfully.\n'.format(client.user))
     
+    # Logging every message the bot is able to see (if not sent by the bot itself)
     @client.event
     async def on_message(message):
         if message.author != client.user:
@@ -28,7 +26,7 @@ def run_discord_bot():
             user_message = str(message.content)
             channel = str(message.channel)
 
-            print('''{} ==> #{}\n{}: "{}"\n'''.format(message.guild.name, channel, username, user_message))
+            print('{} ==> #{}\n{}: "{}"\n'.format(message.guild.name, channel, username, user_message))
             await send_message(message, user_message)
 
     client.run(TOKEN)
