@@ -4,7 +4,10 @@ import responses
 async def send_message(message, user_message):
     try:
         response = responses.get_response(user_message)
-        await message.channel.send(response)
+        if response:
+            await message.channel.send(response)
+        else: 
+            return
     except Exception as e:
         print(e)
 
@@ -27,7 +30,7 @@ def run_discord_bot(TOKEN):
             user_message = str(message.content)
             channel = str(message.channel)
 
-            print('{} ==> #{}\n{}: "{}"\n'.format(message.guild.name, channel, username, user_message))
+            print('{} ==> #{}\n{}: "{}"'.format(message.guild.name, channel, username, user_message))
             await send_message(message, user_message)
 
     client.run(TOKEN)
