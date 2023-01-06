@@ -18,6 +18,7 @@ def get_response(message: str) -> str:
 m!joke -> Prints a random joke (taken from various APIs)
 ...with more to come```'''
 
+
     # if message not recognized as a command, will search for keywords to respond to
     phrases_list = {
         'baller': 'https://cdn.discordapp.com/attachments/654594751433146378/1033767835199078431/41ce545e2c093bcbf4461c459b4f4dec.mp4',
