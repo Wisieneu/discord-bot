@@ -26,3 +26,4 @@ m!joke -> Prints a random joke (taken from various APIs)
     for phrase in phrases_list.keys():
         if phrase in message:
             return phrases_list[phrase]
+            
