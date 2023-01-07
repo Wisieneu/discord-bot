@@ -1,8 +1,5 @@
-import random
 import requests
 import json
-import discord
-from discord import app_commands
 
 def get_response(message) -> str:
     message_content = message.content.lower()
