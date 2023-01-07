@@ -31,14 +31,15 @@ def run_discord_bot(TOKEN):
     @client.event
     async def on_message(message):
         if message.author != client.user:
-            if message.
-            server_name = str(message.guild.name)
-            username = str(message.author)
-            user_message = str(message.content)
-            channel = str(message.channel)
-
-            print(f'{server_name} ==> #{channel}\n{username}: "{user_message}"')
-            await send_message(message, user_message)
+            if message.guild.name:
+                message_log = f'{str(message.guild.name)} ==> #{str(message.channel)}\n'
+            else: 
+                message_log = '## DIRECT MESSAGE ##\n'
+            message_log += f'{str(message.author)}: "{str(message.content)}"\n'
+            if message.attachments:
+                message_log += str(message.attachments)
+            print(message_log)
+            await send_message(message, str(message.content))
 
     @tree.command(name = "roll", description = "Rolls a random number between 1 and input integer") #Add the guild ids in which the slash command will appear. If it should be in all, remove the argument, but note that it will take some time (up to an hour) to register the command if it's for all guilds.
     async def first_command(interaction, input_int: int):
